@@ -1,0 +1,70 @@
+# ════════════════════════════════════════════════════════════
+#  Solo se sube el SISTEMA (agentes, skills, reglas, plantillas).
+#  Nada de videos, audio, imágenes ni datos personales del creador.
+# ════════════════════════════════════════════════════════════
+
+# ── Secretos y configuración personal ───────────────────────
+.env
+.env.*
+# rutas absolutas de la máquina → ver settings.example.json
+.claude/settings.json
+.claude/settings.local.json
+
+# ── Estado y documentación personal ─────────────────────────
+# estado de las producciones → ver RESUME.example.md
+/RESUME.md
+# nombre del canal y videos hechos (el README lo explica todo)
+/DOCUMENTACION.md
+
+# ── Herramientas externas (clones con su propio git) ────────
+tools/
+
+# ── Lluvias de ideas (contenido del creador) ────────────────
+/ideas/
+
+# ── Nichos: solo shorts, y de shorts solo el sistema ────────
+/nichos/*
+!/nichos/shorts/
+/nichos/shorts/*
+!/nichos/shorts/skills/
+!/nichos/shorts/ideas-virales/
+/nichos/shorts/ideas-virales/*
+!/nichos/shorts/ideas-virales/ANALISIS.md
+#   Excluidos así: scripts/ (guiones), exports/ (renders y logs),
+#   assets/ (voces), references/ (reels de terceros),
+#   publicacion/ (calendario, marca, datos de cuentas),
+#   aprobaciones-pendientes.md
+
+# ── Media en cualquier lugar (por si acaso) ─────────────────
+*.mp4
+*.webm
+*.mov
+*.mkv
+*.avi
+*.m4v
+*.gif
+*.wav
+*.mp3
+*.m4a
+*.aac
+*.ogg
+*.flac
+*.opus
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.heic
+*.svg
+*.psd
+*.npy
+*.srt
+*.vtt
+*.ass
+
+# ── Generados ───────────────────────────────────────────────
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
