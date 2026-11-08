@@ -2,6 +2,8 @@
 
 <div align="center">
 
+[English](./README.en.md) · **Español**
+
 ### Sistema de producción de shorts verticales con agentes de IA
 
 Un equipo de agentes de Claude Code convierte un tema en un video vertical 1080×1920 listo para publicar: idea → guion → escenas → render → revisión → calendario de redes. La persona creadora solo decide en los puntos de control y pone la voz.
@@ -21,7 +23,7 @@ Un equipo de agentes de Claude Code convierte un tema en un video vertical 1080�
 
 | | |
 | --- | --- |
-| 📖 **Este README** | Explicación completa del sistema y cómo replicarlo |
+| 📖 **Este README** ([English](./README.en.md)) | Explicación completa del sistema y cómo replicarlo |
 | 📏 [`CLAUDE.md`](./CLAUDE.md) | Reglas exactas que siguen los agentes (fuente de verdad) |
 | 🤖 [`.claude/agents/`](./.claude/agents/) | Los 6 agentes, uno por archivo |
 | 🧠 [`nichos/shorts/skills/`](./nichos/shorts/skills/) | Los 33 manuales de trabajo |
@@ -45,7 +47,7 @@ El proyecto **no es una aplicación**: es una organización de carpetas, agentes
 
 **Principio central:** todos los tiempos salen de la voz. Whisper transcribe palabra por palabra y cada escena, subtítulo y efecto se ancla a una palabra («cuando dice *piano*, suena una tecla»). Si cambia la voz, se re-ejecuta el generador y todo se recoloca solo.
 
-> **Nota:** el repositorio contiene solo el sistema del nicho `shorts`. No incluye videos, audios, imágenes, guiones ni datos de publicación. Todo está escrito en español.
+> **Nota:** el repositorio contiene solo el sistema del nicho `shorts`. No incluye videos, audios, imágenes, guiones ni datos de publicación. Agentes, skills y reglas están en español; hay una [versión en inglés](./README.en.md) de este README.
 
 ---
 
@@ -92,7 +94,7 @@ Lo marcado con 🔒 existe en local pero **no se sube** (`.gitignore`).
 
 ```bash
 .
-├── README.md
+├── README.md / README.en.md
 ├── CLAUDE.md                     # Reglas de todo el proyecto (único CLAUDE.md)
 ├── RESUME.example.md             # Plantilla → copiar a RESUME.md 🔒
 ├── .env                          # 🔒 Claves de API
