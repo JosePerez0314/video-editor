@@ -26,7 +26,7 @@ A team of Claude Code agents turns a topic into a publish-ready 1080×1920 verti
 | 📖 **This README** | Full explanation of the system and how to replicate it |
 | 📏 [`CLAUDE.md`](./CLAUDE.md) | Exact rules the agents follow (source of truth) |
 | 🤖 [`.claude/agents/`](./.claude/agents/) | The 6 agents, one file each |
-| 🧠 [`nichos/shorts/skills/`](./nichos/shorts/skills/) | The 33 working manuals |
+| 🧠 [`nichos/shorts/skills/`](./nichos/shorts/skills/) | The 42 working manuals |
 | 📈 [`nichos/shorts/ideas-virales/ANALISIS.md`](./nichos/shorts/ideas-virales/ANALISIS.md) | Viral reels analysis the idea rubric is built on |
 | 📍 [`RESUME.example.md`](./RESUME.example.md) | Session state template |
 | 🔐 [`.claude/settings.example.json`](./.claude/settings.example.json) | Permissions template |
@@ -108,9 +108,11 @@ Items marked 🔒 exist locally but are **not committed** (`.gitignore`).
 ├── tools/                        # 🔒 External clones
 │   └── architect/                # Render engine (Remotion) + asset library
 └── nichos/shorts/                # "niches/shorts"
-    ├── skills/                   # 33 working manuals
+    ├── skills/                   # 42 working manuals
+    ├── herramientas/             # "tools": comprobar_guion.py (4 pillars) · consumo_sesion.py (estimated usage)
     ├── ideas-virales/            # "viral ideas"
     │   ├── ANALISIS.md           # Distilled analysis of viral reels → rubric
+    │   ├── ANALISIS-series-es.md # 10 Spanish-language virals → 4-pillar thresholds
     │   ├── raw/                  # 🔒 The analyzed reels
     │   └── frames/               # 🔒 Frame strips per reel
     ├── references/current/       # 🔒 Videos that set the aesthetic bar
@@ -235,11 +237,12 @@ In `nichos/shorts/skills/`. Agents read them before working.
 
 | Group | Skills | Used by |
 | --- | --- | --- |
-| Ideas and virality | `viral-idea-generation`, `viral-rubric`, `viral-reference-analysis`, `viral-pattern-execution`, `fact-vs-hypothesis`, `concepto-shorts` | strategist |
-| Script | `hook-opening` (first 3 s), `narrative-structure`, `scriptwriting` (topic → folder map) | strategist, creative-producer |
+| Ideas and virality | `viral-idea-generation`, `viral-rubric`, `viral-reference-analysis`, `viral-pattern-execution`, `fact-vs-hypothesis`, `concepto-shorts`, `fases-viralidad-tiktok` (TikTok virality phases), `adaptacion-ingles` (adapting English reels) | strategist, social-strategist |
+| Script | 🔒 `guion-4-pilares` (the 4 script pillars: hook · retention · depth · CTA; checked with `herramientas/comprobar_guion.py`), `hook-opening` (first 3 s), `narrative-structure`, `scriptwriting` (topic → folder map) | strategist, creative-producer |
 | Scenes and style | `plan-escenas`, `visual-reference-analysis`, `composition-vertical` (safe zones), `pacing-tight` (rhythm), `subtitles-keyword-highlight` | creative-producer, editor |
-| Editing | `edicion-escenas`, `reutilizacion-materiales` (asset reuse) | editor |
-| Quality | `revision-calidad` (the 30 checks), `render-inspection` | reviewer |
+| Editing | `edicion-escenas`, `reutilizacion-materiales` (asset reuse), `revision-por-bloques` (review stops before the final render) | editor |
+| Animation per style | `animacion-monigotes`, `animacion-monigotes-3d`, `animacion-serie-pov` | editor |
+| Quality | `revision-calidad` (the 30 checks), `render-inspection`, `errores-edicion` and `errores-serie-pov` (mistakes already made) | reviewer, editor |
 | Social media | `publicacion-multired`, `red-instagram-reels`, `red-tiktok`, `red-youtube-shorts`, `red-facebook-reels`, `titulos-descripciones`, `portadas-shorts`, `checklist-subida`, `lanzamiento-cuenta`, `seguimiento-resultados`, `metricas-viralidad`, `analisis-cuentas`, `investigacion-redes-chrome` | social-strategist |
 | Direction | `presupuesto-tokens` (token budget), `protocolo-nocturno` (night protocol) | director |
 
@@ -357,6 +360,16 @@ Each project declares its style in `project-log.md` and in every brief. The styl
 | Subtitles | "Selection": Figtree, top center, word by word, box on the keyword; moves down over graphics | Centered, 1–2 words, Archivo Black with outline; bottom (y≈1380) or top (y≈950) depending on the shot |
 | Sound | Voice (+ soft ambience) | Voice + diegetic SFX for what's on screen, no music, ≥ 10 dB under the voice |
 | Ending | Loop with a 1.2 s tail | Loop |
+
+| | `estilo-monigotes-3d` (stick figures in 3D) | `estilo-serie-pov` (POV series) |
+| --- | --- | --- |
+| Visuals | The same 2D stick figures inside CSS 3D sets; the camera travels in depth and never stops | Flat 2D in second person ("you"): black-headed characters with a rim light, one hoodie colour per character, "DAY · time · place · countdown" HUD, POV phone UI |
+| Pacing | Like stick figures, with blurred whip pans | Hard cuts (white flash, sepia flashback, whip pan); something new every ≈ 1.7 s |
+| Subtitles | Like stick figures | Poppins ExtraBold caps, 2–3 words, the spoken one in yellow, fixed at y ≈ 1460 |
+| Sound | Like stick figures | No music; siren, low ambience and SFX at the original's measured level and timbre; several voices |
+| Ending | Loop | On-screen A/B choice + "Follow for part N"; episodic, may exceed 90 s |
+
+Styles are never mixed: no rule from one profile applies to another.
 
 **Forbidden:** one emoji or icon per word, stacked geometric shapes, plain text as the main visual, empty screens, Flux-generated images, cuts with no change, and abrupt endings.
 

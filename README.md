@@ -26,7 +26,7 @@ Un equipo de agentes de Claude Code convierte un tema en un video vertical 1080�
 | 📖 **Este README** ([English](./README.en.md)) | Explicación completa del sistema y cómo replicarlo |
 | 📏 [`CLAUDE.md`](./CLAUDE.md) | Reglas exactas que siguen los agentes (fuente de verdad) |
 | 🤖 [`.claude/agents/`](./.claude/agents/) | Los 6 agentes, uno por archivo |
-| 🧠 [`nichos/shorts/skills/`](./nichos/shorts/skills/) | Los 33 manuales de trabajo |
+| 🧠 [`nichos/shorts/skills/`](./nichos/shorts/skills/) | Los 42 manuales de trabajo |
 | 📈 [`nichos/shorts/ideas-virales/ANALISIS.md`](./nichos/shorts/ideas-virales/ANALISIS.md) | Análisis de reels virales del que sale la rúbrica de ideas |
 | 📍 [`RESUME.example.md`](./RESUME.example.md) | Plantilla del estado de sesión |
 | 🔐 [`.claude/settings.example.json`](./.claude/settings.example.json) | Plantilla de permisos |
@@ -106,9 +106,11 @@ Lo marcado con 🔒 existe en local pero **no se sube** (`.gitignore`).
 ├── tools/                        # 🔒 Clones externos
 │   └── architect/                # Motor de render (Remotion) + biblioteca
 └── nichos/shorts/
-    ├── skills/                   # 33 manuales de trabajo
+    ├── skills/                   # 42 manuales de trabajo
+    ├── herramientas/             # comprobar_guion.py (4 pilares) · consumo_sesion.py (consumo estimado)
     ├── ideas-virales/
     │   ├── ANALISIS.md           # Análisis destilado de reels virales → rúbrica
+    │   ├── ANALISIS-series-es.md # 10 virales en español → umbrales de los 4 pilares
     │   ├── raw/                  # 🔒 Los reels analizados
     │   └── frames/               # 🔒 Tiras de cuadros por reel
     ├── references/current/       # 🔒 Videos que marcan la vara estética
@@ -233,11 +235,12 @@ En `nichos/shorts/skills/`. Los agentes las leen antes de trabajar.
 
 | Grupo | Skills | Quién |
 | --- | --- | --- |
-| Ideas y viralidad | `viral-idea-generation`, `viral-rubric`, `viral-reference-analysis`, `viral-pattern-execution`, `fact-vs-hypothesis`, `concepto-shorts` | strategist |
-| Guion | `hook-opening` (primeros 3 s), `narrative-structure`, `scriptwriting` (mapa tema → carpeta) | strategist, creative-producer |
+| Ideas y viralidad | `viral-idea-generation`, `viral-rubric`, `viral-reference-analysis`, `viral-pattern-execution`, `fact-vs-hypothesis`, `concepto-shorts`, `fases-viralidad-tiktok`, `adaptacion-ingles` (adaptar reels en inglés) | strategist, social-strategist |
+| Guion | 🔒 `guion-4-pilares` (gancho · retención · profundización · CTA; se comprueba con `herramientas/comprobar_guion.py`), `hook-opening` (primeros 3 s), `narrative-structure`, `scriptwriting` (mapa tema → carpeta) | strategist, creative-producer |
 | Escenas y estilo | `plan-escenas`, `visual-reference-analysis`, `composition-vertical` (zonas seguras), `pacing-tight` (ritmo), `subtitles-keyword-highlight` | creative-producer, editor |
-| Edición | `edicion-escenas`, `reutilizacion-materiales` | editor |
-| Calidad | `revision-calidad` (las 30 comprobaciones), `render-inspection` | reviewer |
+| Edición | `edicion-escenas`, `reutilizacion-materiales`, `revision-por-bloques` (paradas de revisión antes del render) | editor |
+| Animación por estilo | `animacion-monigotes`, `animacion-monigotes-3d`, `animacion-serie-pov` | editor |
+| Calidad | `revision-calidad` (las 30 comprobaciones), `render-inspection`, `errores-edicion` y `errores-serie-pov` (errores ya cometidos) | reviewer, editor |
 | Redes | `publicacion-multired`, `red-instagram-reels`, `red-tiktok`, `red-youtube-shorts`, `red-facebook-reels`, `titulos-descripciones`, `portadas-shorts`, `checklist-subida`, `lanzamiento-cuenta`, `seguimiento-resultados`, `metricas-viralidad`, `analisis-cuentas`, `investigacion-redes-chrome` | social-strategist |
 | Dirección | `presupuesto-tokens`, `protocolo-nocturno` | director |
 
@@ -355,6 +358,16 @@ Cada proyecto declara su estilo en el `project-log.md` y en cada encargo. El `pe
 | Subtítulos | «Selección»: Figtree arriba al centro, palabra a palabra, recuadro en la clave; bajan en tomas con gráficos | Centrados, 1–2 palabras, Archivo Black con contorno; abajo (y≈1380) o arriba (y≈950) según el plano |
 | Sonido | Voz (+ ambiente suave) | Voz + SFX diegéticos de lo que aparece, sin música, ≥ 10 dB bajo la voz |
 | Final | Bucle con 1.2 s de cola | Bucle |
+
+| | `estilo-monigotes-3d` | `estilo-serie-pov` |
+| --- | --- | --- |
+| Imagen | Los mismos monigotes 2D dentro de escenarios 3D de CSS; la cámara viaja en profundidad y nunca para | 2D plano en segunda persona («tú»): personajes de cabeza negra con filo de luz, sudadera de color por personaje, HUD «DÍA · hora · lugar · cuenta atrás», UI de móvil en POV |
+| Ritmo | Como monigotes, con barridos con desenfoque | Cortes secos (flash blanco, flashback sepia, barrido); algo nuevo cada ≈ 1.7 s |
+| Subtítulos | Como monigotes | Poppins ExtraBold en mayúsculas, 2–3 palabras, la dicha en amarillo, fijos en y ≈ 1460 |
+| Sonido | Como monigotes | Sin música; sirena, ambiente grave y SFX al nivel y timbre medidos del original; varias voces |
+| Final | Bucle | Elección A/B en pantalla + «Sígueme para la parte N»; serie por episodios, puede pasar de 90 s |
+
+Los estilos no se mezclan: ninguna regla de un perfil se aplica a otro.
 
 **Prohibido:** un emoji o icono por palabra, formas geométricas apiladas, texto plano como visual principal, pantalla vacía, imágenes generadas con Flux, cortes sin cambio y finales en seco.
 
