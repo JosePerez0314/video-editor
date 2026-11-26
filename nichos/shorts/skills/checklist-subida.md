@@ -10,9 +10,10 @@ description: Lista de comprobación por video antes de que el creador lo suba a 
 - [ ] El primer cuadro vuelve al último (bucle): se ve bien al reiniciar.
 
 ## Textos (listos para pegar, en `calendario.md`)
-- [ ] Instagram: pregunta + emoji. TikTok: pregunta + 2–3 hashtags. YouTube: título ≤ 60 car. + 1 línea. Facebook: pregunta corta. (`titulos-descripciones.md`)
+- [ ] Instagram: pregunta + emoji. TikTok: pregunta + 2–3 hashtags. YouTube: título ≤ 60 car. + hashtags al final del título (≤ 100 en total), descripción sin hashtags. Facebook: pregunta corta. (`titulos-descripciones.md`)
 - [ ] CTA según la fase de la cuenta (`lanzamiento-cuenta.md`).
 - **Comentario fijado siempre (creador, 2026-11-07: «agrega el comentario que va fijado, siempre en los md»).** Toda ficha de subida (`publicacion/subidas/<slug>.md`) y todo bloque de textos del `calendario.md` lleva el comentario fijado **escrito completo, listo para pegar, dentro del apartado de cada red** (IG, TikTok, YouTube y Facebook), no un «ver abajo».
+- **Sección «Respondiendo comentarios» siempre (creador, 2026-11-13: «créale su propia sección de respondiendo comentarios, y haz todos los mds así desde ahora»).** Toda ficha `publicacion/subidas/<slug>.md` termina con `## Respondiendo comentarios`. Cada respuesta va en una subsección `### <red> · <fecha> · «comentario tal cual» (usuario)`: la respuesta lista para pegar en un bloque de código, notas cortas y las fuentes enlazadas si da un dato. Lo más nuevo, arriba. Si aún no hay ninguna, se deja la sección vacía con «(Sin comentarios respondidos todavía.)». Las respuestas a comentarios que pida el creador se guardan ahí, no solo en el chat.
 - [ ] Portada = cuadro del hook (`portadas-shorts.md`).
 
 ## Orden y hora

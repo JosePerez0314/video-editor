@@ -15,7 +15,7 @@ description: Cómo escribir título/descripción, hashtags y CTA de cada short p
 |---|---|---|---|
 | Instagram | pregunta + 1 emoji | ninguno (patrón @resultaaquee) | «Sígueme para más» al inicio; embudo solo si hay link |
 | TikTok | pregunta + 2–3 hashtags de formato/tema (`#animacion #curiosidades #<tema>`) | 2–3 | «Sígueme para más» |
-| YouTube Shorts | **título** ≤ 60 car. = pregunta; descripción = 1 línea + CTA | 0–3 en el título | «Suscríbete para más» |
+| YouTube Shorts | **título** ≤ 60 car. = pregunta, **seguido de los hashtags** (`#Shorts` + 2 de tema; total ≤ 100 car.); descripción = 1 línea + CTA, **sin hashtags** (creador, 2026-11-14: «en youtube los hashdags vayan junto con el titulo y no descripcion») | 2–3, **solo en el título** | «Suscríbete para más» |
 | Facebook | pregunta corta; hashtags opcionales | 0–3 | ninguno |
 
 Ejemplos observados: «¿Sabías esto de tu teclado?» (IG, 3.8M), «¿Por qué los mosquitos siempre te pican a ti? 🦟 #cuerpohumano» (YT), «¿Qué pasa cuando la comida entra en las vías respiratorias? #cartoon #animation» (TikTok, millones).

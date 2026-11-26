@@ -21,9 +21,9 @@ description: Cómo funciona YouTube Shorts para nuestro canal, con datos reales 
 Likes/vistas 2.5–3.4 %; comentarios/vistas 0.005–0.03 %.
 
 ## Texto
-- **Título = pregunta o afirmación corta** (≤ 60 caracteres), 1 emoji, 0–3 hashtags de tema (`#curiosidades`, `#cuerpohumano`). Ej. observados: «¿Por qué los mosquitos siempre te pican a ti? 🦟», «Deja de cortarte las uñas así!!».
+- **Título = pregunta o afirmación corta** (≤ 60 caracteres), 1 emoji y **los hashtags al final del título** (`#Shorts` + 2 de tema, p. ej. `#curiosidades #historia`; título completo ≤ 100 caracteres) (creador, 2026-11-14: «en youtube los hashdags vayan junto con el titulo y no descripcion»). Ej. observados: «¿Por qué los mosquitos siempre te pican a ti? 🦟», «Deja de cortarte las uñas así!!».
 - Los canales grandes mezclan títulos ES/EN; no está probado que ayude a un canal nuevo.
-- Descripción: una línea que repite la pregunta + CTA. `#shorts` no hace falta.
+- Descripción: una línea que repite la pregunta + CTA. **Sin hashtags en la descripción**: van en el título.
 - Duración: 25–35 s en los consistentes. Publicar el mismo día o el siguiente a Instagram.
 
 ## Portada

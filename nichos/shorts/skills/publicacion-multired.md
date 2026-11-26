@@ -21,9 +21,10 @@ El mismo `final.mp4` (1080×1920, 30 fps, H.264+AAC, −14 LUFS, ≤ 90 s) sirve
 |---|---|---|
 | Instagram | Pregunta corta + 1 emoji + CTA del momento | Sin hashtags (patrón @resultaaquee) |
 | TikTok | La misma pregunta + CTA | 2–3 hashtags de formato/tema (`#animacion #curiosidades`), patrón de dr.marinbu |
-| YouTube Shorts | Título = la pregunta (≤ 60 caracteres); descripción = una línea + CTA | `#shorts` no es necesario |
+| YouTube Shorts | Título = la pregunta (≤ 60 caracteres) + hashtags; descripción = una línea + CTA | **En el título, nunca en la descripción**: `#Shorts` + 2 de tema (creador, 2026-11-14: «en youtube los hashdags vayan junto con el titulo y no descripcion») |
 
 - **Comentario fijado siempre (creador, 2026-11-07: «agrega el comentario que va fijado, siempre en los md»).** Toda ficha de subida (`publicacion/subidas/<slug>.md`) y todo bloque de textos del `calendario.md` lleva el comentario fijado **escrito completo, listo para pegar, dentro del apartado de cada red** (IG, TikTok, YouTube y Facebook), no un «ver abajo».
+- **Sección «Respondiendo comentarios» siempre (creador, 2026-11-13: «créale su propia sección de respondiendo comentarios, y haz todos los mds así desde ahora»).** Toda ficha `publicacion/subidas/<slug>.md` termina con `## Respondiendo comentarios`. Cada respuesta va en una subsección `### <red> · <fecha> · «comentario tal cual» (usuario)`: la respuesta lista para pegar en un bloque de código, notas cortas y las fuentes enlazadas si da un dato. Lo más nuevo, arriba. Si aún no hay ninguna, se deja la sección vacía con «(Sin comentarios respondidos todavía.)». Las respuestas a comentarios que pida el creador se guardan ahí, no solo en el chat.
 CTA según la fase (ver `lanzamiento-cuenta.md`): «Sígueme para más» al principio; después el CTA de embudo si hay link.
 
 ## Qué medir (pedir al creador a las 24 h y a los 7 días)
