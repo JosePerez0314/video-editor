@@ -14,6 +14,7 @@ Antes de **cualquiera** de estos encargos. Si la tarea no está en la lista, no 
 | Puerta | Coste medido (2026-11-03) | Pregunta clave |
 |---|---|---|
 | Render o re-render del editor | 180–260K | ¿Puedo juntar más cambios en esta pasada? |
+| Render completo con piezas/sets nuevos (pudding, 2026-11-13) | 500–700K | ¿Cuántas piezas nuevas pide el plan? ¿Se pueden reutilizar sets? |
 | Prueba de 10 s con piezas nuevas | 382K (soldado) | ¿El plan usa el catálogo? Más de 3 piezas nuevas encarece |
 | Guion + escenas (creative) | ~104K | ¿Ya está el análisis del original? (evita la v2) |
 | Concepto (strategist) | ~87K | — |
@@ -21,6 +22,8 @@ Antes de **cualquiera** de estos encargos. Si la tarea no está en la lista, no 
 | Investigación con Chrome (social) | ~235K Opus · ~62K Sonnet | ¿Hace falta ya o hay tema en cola? |
 | Lote de ideas / reevaluación (strategist) | 90–115K | ¿Hay ya ideas guardadas sin usar? |
 | Consulta a 2+ agentes | ~45K cada uno | ¿Basta con uno? |
+| Evaluación de música (creative, esfuerzo bajo) | ~35K cada una | ¿Está decidida la música antes de la prueba? (ladrón: 3 evaluaciones) |
+| Retomar tras corte de sesión (editor) | +120–260K por corte | ¿Hay margen de sesión para terminar? Si no, no lanzar el render |
 | Ronda de corrección nueva | editor + reviewer ≈ 350K | ¿Es MAJOR/CRITICAL o se puede aceptar/agrupar? |
 
 Coste de referencia por video completo (concepto → entrega): **~0.9–1.2M tokens**. Si un proyecto pasa de 1.5M, avisar al creador.
@@ -84,5 +87,13 @@ Al entregar cada video, el director (sin lanzar agentes) escribe en su `project-
 4. **Cambios:** 1–3 reglas concretas que se aplican desde el siguiente video; se escriben en esta skill (§1–§5) o en el agente afectado, y se comunican al creador en la entrega.
 
 ## 7 · Reglas aprendidas (análisis posteriores)
+- **comprobaciones-3d comunes (2026-11-20), 354K de editor (estimado 100–150K, +136 %):** causa: juntó las comprobaciones de 5 generadores, construyó 5 fixtures desde EDL reales y midió en `final.mp4`; el creador había pedido «que no se esmere». Para encargos de herramientas: limitar a 1 generador de origen y fixtures sintéticos, y decir el techo de tokens en el encargo. Se paga una vez; ya cazó un #48 (manga de `mano_asa`, clonacion e06) que nadie vio.
+- **ladron-que-movia-muebles (2026-11-17/18), ≈ 2.0M:** (1) la biblioteca ahorra en el render completo (258K frente a 543K de cajeros) pero no en la prueba de 10 s (409K): las piezas nuevas caen al principio; (2) lo caro fueron las rondas: 3 cortes de sesión con el editor trabajando (≈ +300K de retomar). **Antes de lanzar un render, preguntar al creador cuánto le queda de sesión; con < 25 % no se lanza un render completo** (desde el 21-nov el director lo mira él mismo: lo lee siempre el `shorts-social-strategist` lanzado en Haiku —o Sonnet si Haiku no puede— con Chrome en `claude.ai/settings/usage`), y RESUME.md se actualiza antes; (3) la música (fuente, tramos, nivel) se decide **antes** de la prueba de 10 s; (4) revisión completa a 2 c/s salvo los tramos de riesgo (302K a 4 c/s); (5) nunca dos agentes sobre el mismo generador a la vez.
+- **Noviembre 2026 = modo recopilación (creador, 2026-11-13):** 3–4 videos/semana, temas de 3 en 3 elegidos solo por viralidad (fórmula cajeros), sin agrupar por mundo; el gasto no frena porque cada video enriquece la biblioteca. Las tablas de coste siguen sirviendo para registrar, no para descartar temas.
+- **pudding-millas (2026-11-13):** no cerrar ni reiniciar la sesión con un render en marcha; si se corta, relanzar con encargo de «retomar» desde lo que hay en disco (214K frente a ≈ 500K). En cuanto exista el primer render completo, avisar al creador para que lo vea en paralelo a la revisión completa y juntar sus notas con la ronda automática.
 - **voz-grabada R10–R12 (2026-11-03):** (1) nivel de ambiente y densidad de SFX se fijan antes del primer render, no después; (2) dudas técnicas de mezcla/medida → 1 agente o un comando del director; (3) máximo 3 agentes Opus en paralelo (el límite de 5 h cortó un render); lo mecánico a Sonnet.
 - **soldado (2026-11-04):** (1) una preferencia nueva del creador va al agente o skill **antes** de lanzar el encargo, porque un agente en marcha no recibe mensajes (23 SFX generados antes de la orden de reutilizar); (2) el plan de escenas marca `[catálogo]`/`[nueva]` y parte del catálogo (prueba de 10 s de 382K por piezas nuevas); (3) el análisis del original EN→ES va antes del guion (v2 de 104K); (4) SFX diseñados a 13 dB bajo la voz, porque el render los sube ~3 dB (un rehecho de audio); (5) los agentes usan solo comandos permitidos y, en modo desatendido, anotan y siguen (una revisión quedó ~9 h parada en un aviso de permiso); (6) Sonnet cumplió en el análisis social (62K frente a 154–235K en Opus).
+
+## Cierre de tareas grandes (creador, 2026-11-21)
+Tras cada prueba de 10 s, render completo, ronda de corrección o revisión de calidad (también la acotada), el director: **estima** el consumo (última lectura + `subagent_tokens`; ≈ 16K por punto de sesión) y solo lo **lee** de verdad (`shorts-social-strategist` en Haiku, `claude.ai/settings/usage`, cifras en la captura; ≈ 40K) en casos concretos: antes de un render completo o una prueba de 10 s, con la estimación > 60 % o si lo pide el creador (21-nov: «si consume muchos tokens revisar el consumo mejor reservalo para casos especificos»); apunta tokens y consumo en el `project-log.md` y deja `RESUME.md` con el estado y el siguiente paso exacto para seguir en otra sesión. Con la sesión > 75 % avisa al creador antes de lo siguiente.
+**Desde 2026-11-24:** el consumo se estima con `python3 nichos/shorts/herramientas/consumo_sesion.py` (tokens locales + calibración con las lecturas reales del creador, `--calibrar S W`); la lectura con Chrome ya no es posible.
