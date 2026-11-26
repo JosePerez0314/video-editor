@@ -32,3 +32,12 @@ Pedido del creador (2026-11-03): «cada vez que termine un video, que revise los
 - Una pieza promovida debe verse igual en el video original (comprueba un cuadro).
 - Licencias: los SFX de ElevenLabs plan free se marcan como tales en el catálogo (solo registro; la licencia la gestiona el creador, sin avisos).
 - El director revisa las cifras de reutilización en el análisis posterior (`presupuesto-tokens` §6): menos piezas nuevas = menos tokens de editor.
+- **Primero que el video quede bien (creador, 2026-11-11):** «mientras el video quede bien, preorizar hacer cosas que se puedan reutilizar, pero si quedara mal el video, mejor hacer algo que quede bien antes, y luego todo si». Orden: (1) pieza reutilizable si el video queda igual de bien; (2) si hacerla genérica empeora el video o no da tiempo antes de publicar, hazla a medida para que quede bien, anótala en `render-log.md` como «a generalizar» y generalízala al cerrar el video (sección 2), sin cambiar cómo se ve.
+- **Atrezo genérico, no del video:** mostradores, estantes, sillas, puertas, ventanillas y demás objetos de uso común van como piezas sueltas con props (colores, textos, medidas), no dentro de `Piezas<Video>.tsx`. En el archivo del video solo queda lo que es exclusivo de esa historia (carteles con su texto, un objeto único).
+- **Poses y gestos nuevos del monigote** (p. ej. `sentado`) se añaden a `Monigote.tsx`, el personaje base, nunca a un archivo del video.
+
+## 4 · Escenarios 3D (capa `set3d`)
+Cómo se hace todo lo 3D: skill `animacion-monigotes-3d.md` (estilo `estilo-monigotes-3d`). Reglas de reutilización:
+- Primitivas (cámara, `Suelo`, `ParedLado`, `ParedFondo`, `Caja3D`, `PlanoTumbado`, `Cuadro`, `PuertaBisagra`, `Billboard`, `MonigoteSet`, `FigurasDelante`, `fila`, `Sobre2d`, `TEXTURAS`) solo en `src/reel/escenas/Set3d.tsx`; cada lugar en su archivo `Set<Lugar>.tsx` con nombre genérico (hoy: `SetTienda`, `SetSalaEspera`, `SetVentanilla`, `SetCuarto`, `SetDespacho`, `SetExteriores`, base `SetHabitacion`), su objeto de medidas y `omitir` por grupos; el atrezo de uso común en `Atrezo3d.tsx`.
+- Antes de crear un set, busca en el catálogo uno parecido y reutilízalo con props (texturas, colores, carteles); un set nuevo solo si ninguno sirve, con el motivo en `render-log.md`.
+- Cada set se cataloga con su coste medido (s/cuadro) y sus trampas (dentro del 3D nada de filter/opacity/blend/overflow/clip-path: van en `Sobre2d` o sobre el `<Set3d>` entero).

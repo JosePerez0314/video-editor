@@ -14,9 +14,11 @@ description: Cómo edita el shorts-video-editor: entorno (Node 24, whisper), pip
 - Permisos: el proyecto tiene una allowlist en `.claude/settings.json`; **no hace falta modo bypass** y nunca trabajes en modo plan (bloquea toda escritura).
 
 ## Qué estilo usa el proyecto (léelo primero)
-El canal tiene **dos estilos**, en `tools/architect/estilo/estilos/`. El proyecto dice cuál usa en `project-log.md` y en el `escenas.md`; si no lo dice, pregunta al director.
+El canal tiene **tres estilos**, en `tools/architect/estilo/estilos/`. El proyecto dice cuál usa en `project-log.md` y en el `escenas.md`; si no lo dice, pregunta al director.
 - **`estilo-gabriel`** (voz-grabada): escenas de noche, fundidos de 0.4 s, subtítulos «selección» arriba. Las reglas 1–18 de abajo están escritas para este estilo.
-- **`estilo-monigotes`** (hedy-lamarr-wifi, refs de @resultaaquee): monigotes, golpes de cámara con desenfoque cada 1–1.5 s, `subtitulos_centro` que se mueven por plano (ABAJO y≈1380, ARRIBA y≈950 en planos abiertos; cambian solo en los cortes) y **efectos de sonido diegéticos sin música**. Su `perfil.md` gana sobre las reglas 6–11 de abajo. Lee también su `aprendizajes.md` (los 9 errores ya cometidos).
+- **`estilo-monigotes`** (hedy-lamarr-wifi, refs de @resultaaquee): monigotes, golpes de cámara con desenfoque cada 1–1.5 s, `subtitulos_centro` que se mueven por plano (ABAJO y≈1380, ARRIBA y≈950 en planos abiertos; cambian solo en los cortes) y **efectos de sonido diegéticos sin música**. Su `perfil.md` gana sobre las reglas 6–11 de abajo. Lee también su `aprendizajes.md` (los 9 errores ya cometidos). Cómo se anima: skill `animacion-monigotes.md`.
+- **`estilo-monigotes-3d`** (cajeros-loteria, refs de @resultaaquee de noviembre): monigotes 2D dentro de sets 3D (`set3d`), cámara 3D que nunca para, figuras en primer término en 2D (`delante`). **Va aparte de `estilo-monigotes`** (creador, 2026-11-11). Perfil `estilo-monigotes-3d/perfil.md` + `aprendizajes.md`; cómo se anima: skill `animacion-monigotes-3d.md`.
+- **Antes de entregar** (cualquier estilo de monigotes): recorre `nichos/shorts/skills/errores-edicion.md` y anota en `render-log.md` «errores-edicion: N/N revisados» (creador, 2026-11-12).
 
 ## Pipeline modo solo-audio (explainer sin crudo)
 

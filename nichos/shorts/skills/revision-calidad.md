@@ -6,6 +6,7 @@ description: Las 30 comprobaciones medibles del shorts-quality-reviewer (cada un
 # Revisión de calidad de un short
 
 ## Lista de comprobación (sale de errores reales del editor; aplícala entera)
+**Además (creador, 2026-11-12):** recorre `nichos/shorts/skills/errores-edicion.md` (errores ya cometidos, con su severidad). Un error de esa lista que se repite sube un nivel y se marca «repetido: #N».
 
 Severidad sugerida entre corchetes. Usa la EDL para saber en qué segundo se dice cada palabra.
 
@@ -26,6 +27,9 @@ Severidad sugerida entre corchetes. Usa la EDL para saber en qué segundo se dic
 8. Sin un emoji o icono por palabra, sin formas geométricas apiladas fingiendo caras u órganos, sin texto plano como visual principal, sin iconos de relleno que no se están diciendo. [MAJOR] (rechazos del creador en R1–R4).
 9. Los gráficos son del tema (ondas, sonido, personas), no estadística genérica (barras, cuadrículas). [MINOR]
 10. Los mecanismos se muestran por partes, cada una en su momento. [MINOR]
+
+10b. **3D (pudding-millas, 2026-11-13; se le escaparon al reviewer y los vio el creador):** cada figura junto a un vehículo o mueble se lee claramente delante, detrás o al lado (nunca «metida dentro»), y nada del set la cruza ni le sale de la cabeza (errores #29); todo marco con forma (ventanilla, pantalla, espejo) recorta su contenido (#30). Recórtalos al 100 %. [MAJOR / MINOR]
+10c. Todo texto de atrezo, también el que está tumbado en mesas o suelos, se lee entero en cada plano (#31); el texto que sostiene un personaje se lee hasta el último cuadro (#33). [MAJOR si es repetido]
 
 **E · Ritmo y transiciones**
 11. Ningún tramo > 3 s sin cambio visible (mide con `ffmpeg … select='gt(scene,0.02)'` o compara cuadros cada 0.5 s), salvo un gráfico construyéndose. [MAJOR]
@@ -54,6 +58,11 @@ El proyecto dice qué estilo usa (`project-log.md`, `escenas.md`). Con **`estilo
 - **15:** franja y 1300–1400 libre.
 Además, no se exigen capítulos ni cabecera de fuente.
 
+Con **`estilo-monigotes-3d`** (2D dentro de sets 3D; perfil `tools/architect/estilo/estilos/estilo-monigotes-3d/`, skill `animacion-monigotes-3d.md`), 13–15 se miden contra **su** perfil (cámara que nunca para, desenfoque de barrido hasta 22 px, subtítulo arriba/abajo por plano), y además:
+- **3D-a:** ningún monigote recortado, rebanado por un corte vertical, con la cabeza «rectangular» o que desaparece. Revisa a ≥ 4 cuadros/s los planos con figuras cerca de la cámara o saliendo por un borde (error real: cajeros-loteria, prueba de 10 s, 7.5–9.5 s; y R1, primer plano de la placa). [MAJOR]
+- **3D-b:** sin huecos del color de fondo en suelos ni paredes, y la cámara no atraviesa objetos (lámparas, paredes). [MAJOR]
+- **3D-c · Comprobación automática común (creador, 2026-11-20):** el reviewer corre el **mismo** script que el editor sobre la EDL final y adjunta su salida: `python3 escenas_<slug>.py --edl <edl> --solo-comprobar` (o, en generadores antiguos, `python3 tools/architect/biblioteca/reutilizables/comun/comprobaciones_3d.py --edl <edl final> --generador nichos/shorts/exports/<slug>/escenas_<slug>.py --salida nichos/shorts/exports/<slug>/qa/comprobaciones.txt`). Aviso abierto = hallazgo con su #N y la severidad de `errores-edicion.md`. Los ACEPTADO se miran una vez. **Lo que el script cubre (#3, #4, #5, #10, #15, #29, #31, #32, #33, #48, #53, #65) no se vuelve a buscar cuadro a cuadro**; la revisión a ojo se centra en lo que el script no mide (lista «no automatizado» en la cabecera del módulo: oclusiones #55/#59, canto inclinado con cámara girada, figuras en sofá, piezas con «texto sin comprobar»). Un ✓ a ojo en #5, #29 o #48 solo vale con recorte al 100 % o medida en px. [MAJOR si hay aviso abierto]
+
 **I · Sonido y texto en pantalla** (salen de hedy-lamarr-wifi R2, 2026-11-02; se aplican siempre que el estilo lleve SFX)
 23. Hay efectos de sonido diegéticos de lo que pasa en pantalla y no hay música (si el perfil lo pide). Densidad audible de 0.3–0.4/s. Un video «solo voz» es MAJOR (corrección del creador). [MAJOR]
 24. Sincronía de SFX a ±1 cuadro con su objeto: flash, sello, teclas, saltos… Compara el inicio de cada evento con el cuadro en que el objeto aparece o golpea. [MINOR; MAJOR si son varios]
@@ -63,6 +72,9 @@ Además, no se exigen capítulos ni cabecera de fuente.
 28. Bloques de subtítulo: ninguno es una sola palabra de enlace («Su», «Si», «En», «Ni»…) ni termina en una («Pero tus»). [MINOR]
 29. Empalmes de voz (`voz-v2.mp3`…): sin clic (salto entre muestras en el corte frente al p99.9 de la voz) y nivel ±1 dB. Que suene natural lo confirma el creador. [MAJOR si hay clic]
 30. Licencia de voz y SFX: la gestiona el creador (2026-11-03); no se anota ni se escala. [no aplica]
+
+## Errores del video (siempre, creador 2026-11-13)
+Al final de cada `review.md`: todos los hallazgos con `#N repetido` / `NUEVO`, y `errores-edicion.md` actualizado (nuevos como fila; repetidos con «Evitar» más concreto). Ver «Cómo se alimenta esta lista» en esa skill.
 
 ## Atribución
 - **Concepto** (strategist): la idea o el dato fallan aunque se ejecuten bien.
