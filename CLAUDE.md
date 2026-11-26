@@ -60,7 +60,7 @@ video-editor/
 
 Videos cortos educativos / de curiosidad para TikTok, Reels de Instagram y YouTube Shorts.
 
-**Estado:** operativo end-to-end. 6 agentes, 33 skills, editor Remotion (`tools/architect/`). **Dos estilos:** `estilo-gabriel` (aprobado; referencia **voz-grabada** R9) y `estilo-monigotes` (aprobado; referencia **hedy-lamarr-wifi**, refs de @resultaaquee). Cada proyecto dice cuál usa.
+**Estado:** operativo end-to-end. 6 agentes, 39 skills, editor Remotion (`tools/architect/`). **Cuatro estilos, separados (no se mezclan reglas entre perfiles):** `estilo-gabriel` (aprobado; referencia **voz-grabada** R9), `estilo-monigotes` (aprobado; referencia **hedy-lamarr-wifi**, refs de @resultaaquee; skill `animacion-monigotes`), `estilo-monigotes-3d` (2026-11-11; monigotes 2D dentro de sets 3D al modo actual de @resultaaquee; referencia **cajeros-loteria**; skill `animacion-monigotes-3d`) y `estilo-serie-pov` (2026-11-22; ep. 1 entregado 23-nov; serie interactiva por partes calcada de @coolfunstories4 «Stick Motion»; referencia **alerta-nuclear-ep1**; skill `animacion-serie-pov` y errores `errores-serie-pov.md`). Cada proyecto dice cuál usa.
 
 ## Specs técnicas
 
@@ -83,6 +83,19 @@ Fuente de verdad: `tools/architect/estilo/estilos/estilo-gabriel/perfil.md` (gan
 - **Sonido:** **efectos de sonido diegéticos** de todo lo que aparece en pantalla, sin música; pueden ir sobre la voz, ≥ 10 dB por debajo.
 - **Voz:** ElevenLabs a velocidad 1.0, final en bucle. **Licencia y monetización las gestiona el creador: ningún agente avisa ni escala ese tema.**
 - **Densidad de SFX:** el perfil dice 0.3–0.4 ev/s; el creador dejó el soldado a ≈ 0.77 «para experimentar». Kunst usa esa misma densidad hasta que el creador decida.
+
+**Estilo `estilo-monigotes-3d`** (fuente de verdad: `tools/architect/estilo/estilos/estilo-monigotes-3d/perfil.md` y `aprendizajes.md`; skill `nichos/shorts/skills/animacion-monigotes-3d.md`). Ref. @resultaaquee `DffbYAgR6N2`:
+- **Imagen:** los mismos monigotes 2D (billboards) dentro de escenarios 3D de CSS (`Set3d.tsx`, sets genéricos `Set<Lugar>.tsx`); la cámara viaja en profundidad y nunca para; barridos con desenfoque.
+- **Error conocido:** un monigote cercano que cruza el borde del cuadro sale recortado o rebanado (Chrome). Va con `capa: 'delante'`; el generador lo detecta con `comprobar_bordes`.
+- Subtítulos, voz y SFX como `estilo-monigotes`. Coste del primer video (montar la capa): ≈ 1.5M tokens de editor. Render con Chrome en `--gl=angle` (fijado en `tools/architect/remotion.config.ts`; sin angle el 3D sale rebanado): ≈ 0.19 s/cuadro.
+
+**Estilo `estilo-serie-pov`** (2026-11-22; ep. 1 entregado 23-nov; fuente de verdad: `tools/architect/estilo/estilos/estilo-serie-pov/perfil.md` y `aprendizajes.md`; skill `nichos/shorts/skills/animacion-serie-pov.md`, errores `errores-serie-pov.md`; escena `serie` en `tools/architect/src/reel/escenas/SeriePov.tsx`). Serie en segunda persona («tú») por episodios en la que el público vota A/B qué pasa en la siguiente parte. Ref.: `nichos/shorts/ideas-virales/raw/stickmotion/` (desarmado en `ideas/shorts/2026-11-22-stick-motion-recrear.md`). Creador: «no lo quiero el estilo de monigotes, quiero ese del video original». **Ninguna regla de monigotes aplica.**
+- **Imagen:** 2D plano, personajes de cabeza negra con filo de luz, ojos blancos de pastilla y boca de 2 formas (solo mueve la boca el que habla); sudaderas de color por personaje (protagonista turquesa `#1fb3a6`, vecino rojo ladrillo `#b5452c`); HUD fijo «DÍA N · hora · lugar · cuenta atrás» que salta y se pone roja; UI de móvil en POV.
+- **Ritmo:** cortes secos (más flash blanco, flashback sepia con desenfoque, barrido); algo nuevo cada ≈ 1.7 s.
+- **Subtítulos:** Poppins ExtraBold en mayúsculas, 2–3 palabras, la palabra dicha en amarillo con resplandor, fijos en y ≈ 1460.
+- **Sonido:** **sin música.** Sirena, retumbo grave de ambiente y SFX diegéticos **a los niveles medidos del original** (nivel y banda del original (medido bien por el editor: fondo ≈ 16 dB bajo la voz en pausas reales, **sin agacharse bajo las palabras**, sirena en 700–1450 Hz con dos aullidos cruzados; el «≈ 5 dB» del director estaba mal medido); creador: «las alarmas son mas fuertes»). **El sonido es lo que sumerge en la historia:** cada SFX y ambiente se mide contra el mismo momento del original (nivel y tono/timbre) y se le parece; creador, 2026-11-22: «los efectos de sonido y demas, son importantes porque te sumergen bien en la historia asi que respete los tonos de audio del original». Varias voces: narrador David (Intense, Rapid, and Expressive), vecino Murdock (Deep & commanding), mamá Kate; TV = David con filtro de altavoz.
+- **Final:** elección A/B en pantalla (botones grandes) + «Sígueme para la parte 2»; sin bucle. Se permite > 90 s.
+- **Descargar de TikTok:** el yt-dlp del sistema falla; usar un venv con `pip install "yt-dlp[default,curl-cffi]"` y `--impersonate chrome`.
 
 - **Prohibido (gabriel):** emojis/iconos por palabra, formas geométricas apiladas, texto plano como visual principal, pantalla vacía, imágenes generadas con Flux, barras de estadística fuera de tema, cortes sin cambio, final en seco. El pipeline antiguo (HyperFrames/GSAP) fue eliminado.
 
@@ -158,11 +171,14 @@ Contrato de 6 secciones + 5 reglas globales cada uno.
 
 ## Skills del nicho (en `nichos/shorts/skills/`)
 
-- Narrativa y viralidad: `hook-opening`, `narrative-structure`, `scriptwriting`, `viral-reference-analysis`, `viral-pattern-execution`, `viral-idea-generation`, `viral-rubric`, `fact-vs-hypothesis`.
+- Narrativa y viralidad: `hook-opening`, `narrative-structure`, `scriptwriting`, `viral-reference-analysis`, `viral-pattern-execution`, `viral-idea-generation`, `viral-rubric`, `fact-vs-hypothesis`, `fases-viralidad-tiktok` (fases 0–4 de TikTok y los 5 factores, cruzados con nuestros datos; prioridad: finalización, repeticiones, compartidos y comentarios; creador, 2026-11-19).
+- **🔒 `guion-4-pilares` (SAGRADO, creador 2026-11-24):** gancho (verbal, textual y visual en 0–5 s), retención (revelación al final), profundización (diferenciarse de la competencia) y CTA que obliga a interactuar. Todo `guion-voz.md` lleva la `ficha-4-pilares` y pasa `python3 nichos/shorts/herramientas/comprobar_guion.py <guion>` (1 = no se entrega). Umbrales de 10 virales en español: `ideas-virales/ANALISIS-series-es.md`.
 - Producción: `plan-escenas` (cómo planear las escenas), `visual-reference-analysis`, `subtitles-keyword-highlight` (apunta a «selección»), `composition-vertical`, `pacing-tight`.
 - Por agente: `concepto-shorts` (strategist), `plan-escenas` (creative-producer), `edicion-escenas` (editor), `revision-calidad` (reviewer).
+- Animación por formato (editor): `animacion-monigotes` (plano), `animacion-monigotes-3d` (2D+3D) y `animacion-serie-pov` (serie POV; errores propios en `errores-serie-pov.md`, 2026-11-23).
 - Redes (social-strategist): `lanzamiento-cuenta` (secuencia de @resultaaquee), `publicacion-multired`, `analisis-cuentas`; una por red: `red-instagram-reels`, `red-tiktok`, `red-youtube-shorts`, `red-facebook-reels`; transversales: `titulos-descripciones`, `portadas-shorts` (no se diseñan miniaturas), `checklist-subida`, `seguimiento-resultados`, `metricas-viralidad`, `investigacion-redes-chrome`.
-- Calidad: `render-inspection`.
+- Temas: `adaptacion-ingles` (elegir y traducir reels en inglés de los canales que traduce @resultaaquee, método cajeros; social-strategist fase A, viral-strategist fase B; creador, 2026-11-13).
+- Calidad: `render-inspection`; `revision-por-bloques` (el editor revisa por bloques de escenas mientras construye, 3–4 paradas antes del render final; creador, 2026-11-13); `errores-edicion` (lista única de errores ya cometidos: el editor la recorre antes de entregar y el reviewer la usa como comprobación; creador, 2026-11-12).
 - Editor: `reutilizacion-materiales` (catálogo único `tools/architect/biblioteca/reutilizables/CATALOGO.md`; lo usado en ≥ 2 videos pasa a `comun/`).
 - Director: `protocolo-nocturno` (se activa con «me voy a dormir»: termina lo empezado sin interrumpir; lo que pida permiso va a `nichos/shorts/aprobaciones-pendientes.md` para el final; resumen al volver).
 - Director: `presupuesto-tokens` (antes de cada tarea cara; registro de tokens por proyecto; tabla de modelo/esfuerzo por agente).
@@ -193,7 +209,8 @@ Si el contenido cruza dos, elegir el más específico. Si no hay encaje, usar `c
 nichos/shorts/
 ├── references/current/           (set estético actual)
 ├── ideas-virales/{ANALISIS.md, raw/, frames/}
-├── skills/                       (33 skills)
+├── skills/                       (39 skills)
+├── herramientas/comprobar_guion.py (comprobación automática de los 4 pilares)
 ├── publicacion/                  (calendario.md + cuentas/<cuenta>/ datos de referencia)
 ├── scripts/<topic>/
 │   ├── <slug>.concept.md         (strategist)

@@ -17,7 +17,11 @@ Decides cómo, cuándo y con qué texto sale cada video en cada red, y qué conv
 - Plan de lanzamiento y calentamiento de cuenta.
 - Investigación de cuentas y videos virales (formato, cadencia, arranque) en las cuatro redes, con Chrome y yt-dlp.
 - Seguimiento a 24 h / 7 d y recomendación de temas al director.
+- **Lectura del consumo de Claude (creador, 2026-11-21: «que sea un solo agente que sea encargado de eso y que sea uno que no este muy ocupado»):** cuando el director lo pida, abre con Chrome `https://claude.ai/settings/usage` en una pestaña propia, lee el % de la sesión actual (5 h) y el semanal con sus reinicios, cierra la pestaña y devuelve solo esas cifras. Solo lectura: no tocas ajustes ni compras. El director te lanza para esto con `model: "haiku"` (o `sonnet` si Haiku no puede). Los ajustes se abren como ventana encima del chat y las cifras **solo salen en la captura**, no en `get_page_text`: ve directo a una captura (21-nov).
+- **⚠️ Desde 2026-11-24 no se lee el consumo con Chrome** (claude.ai bloquea sus Ajustes a la extensión): el director lo estima con `nichos/shorts/herramientas/consumo_sesion.py`. Si te lo encargan, contesta que ya no se puede.
 
+
+**Tandas de 3 (creador, 2026-11-13, modo recopilación):** en la fase A de `adaptacion-ingles` (§2b) entregas 3 temas en inglés elegidos solo por viralidad con la fórmula de cajeros (personaje + algo indebido + dinero + trampa o giro, contado como historia), más 2–3 de reserva. El mundo no cuenta: no agrupes por mundo ni penalices escenarios nuevos. Se producen los 3 salvo veto del creador.
 ## 2 · Información de entrada
 Videos terminados en `nichos/shorts/exports/<slug>/final.mp4` con su `concept.md` y `review.md` APPROVED · cuentas o redes que nombre el creador · métricas que el creador comparta · `nichos/shorts/publicacion/analisis-redes-*.md` (investigación previa) y `calendario.md`.
 
@@ -25,6 +29,7 @@ Videos terminados en `nichos/shorts/exports/<slug>/final.mp4` con su `concept.md
 - Siempre: `publicacion-multired.md`, `titulos-descripciones.md`, `checklist-subida.md`, `metricas-viralidad.md`.
 - Según la red: `red-instagram-reels.md` · `red-tiktok.md` · `red-youtube-shorts.md` · `red-facebook-reels.md`.
 - Lanzamiento: `lanzamiento-cuenta.md` · Portadas: `portadas-shorts.md` · Resultados: `seguimiento-resultados.md`.
+- Temas en inglés para adaptar (fase A): `adaptacion-ingles.md`.
 - Investigar: `investigacion-redes-chrome.md`, `analisis-cuentas.md`, `fact-vs-hypothesis.md`; temas: `ideas-virales/ANALISIS.md`.
 
 ## 3 · Formato de salida
@@ -33,12 +38,14 @@ Videos terminados en `nichos/shorts/exports/<slug>/final.mp4` con su `concept.md
 - Señales: `CALENDARIO LISTO (shorts)` + ruta · `ANALISIS LISTO (shorts)` + ruta.
 
 ## 4 · Criterios de aceptación
+- **YouTube: los hashtags van al final del título, nunca en la descripción** (creador, 2026-11-14: «en youtube los hashdags vayan junto con el titulo y no descripcion»). `#Shorts` + 2 de tema; título completo ≤ 100 caracteres.
 - Cada video del calendario tiene texto para **cada red** según su skill, hora, orden y portada, y pasa el `checklist-subida.md`.
 - Todo dato de investigación lleva fuente y fecha; lo no medible se declara; vistas acumuladas ≠ 48 h.
 - «Viral»/«consistente» se usan solo con las definiciones de `metricas-viralidad.md`.
 - Observado y supuesto van separados; una prueba cambia una sola variable.
 - Sin promesas de viralidad.
 - **Comentario fijado siempre (creador, 2026-11-07: «agrega el comentario que va fijado, siempre en los md»).** Toda ficha de subida (`publicacion/subidas/<slug>.md`) y todo bloque de textos del `calendario.md` lleva el comentario fijado **escrito completo, listo para pegar, dentro del apartado de cada red** (IG, TikTok, YouTube y Facebook), no un «ver abajo».
+- **Sección «Respondiendo comentarios» siempre (creador, 2026-11-13: «créale su propia sección de respondiendo comentarios, y haz todos los mds así desde ahora»).** Toda ficha `publicacion/subidas/<slug>.md` termina con `## Respondiendo comentarios`. Cada respuesta va en una subsección `### <red> · <fecha> · «comentario tal cual» (usuario)`: la respuesta lista para pegar en un bloque de código, notas cortas y las fuentes enlazadas si da un dato. Lo más nuevo, arriba. Si aún no hay ninguna, se deja la sección vacía con «(Sin comentarios respondidos todavía.)». Las respuestas a comentarios que pida el creador se guardan ahí, no solo en el chat.
 - **Licencia de voz y SFX:** de la licencia y la monetización se ocupa el creador (2026-11-03: «de eso me encargo yo»). No añadas avisos ni preguntas sobre ese tema.
 
 **Ahorro de tokens (2026-11-04).** Corres en Sonnet: en el soldado, un análisis costó 62K, cuando en Opus las investigaciones costaron entre 154K y 235K.

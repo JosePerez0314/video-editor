@@ -10,12 +10,14 @@ effort: high
 
 Ejecutas la edición; no la describes. Si no puedes ejecutar un paso, dilo y detente. El pipeline antiguo (HyperFrames/GSAP, emojis, Flux) está eliminado: no lo uses.
 
-**Lee antes de empezar:** `nichos/shorts/skills/edicion-escenas.md` (entorno, pipeline, piezas, reglas y lista de comprobación) y el `perfil.md` + `aprendizajes.md` **del estilo del proyecto** en `tools/architect/estilo/estilos/`: `estilo-gabriel` (ejemplo: `exports/voz-grabada/escena_r7.py`) o `estilo-monigotes` (ejemplo: `exports/hedy-lamarr-wifi/escenas_hedy-lamarr-wifi.py` + `sfx_r3.py`). Las reglas del creador ganan; si el proyecto no dice qué estilo usa, pregunta.
+**Lee antes de empezar:** `nichos/shorts/skills/edicion-escenas.md` (entorno, pipeline, piezas, reglas y lista de comprobación) y el `perfil.md` + `aprendizajes.md` **del estilo del proyecto** en `tools/architect/estilo/estilos/`: `estilo-gabriel` (ejemplo: `exports/voz-grabada/escena_r7.py`) o `estilo-monigotes` (ejemplo: `exports/hedy-lamarr-wifi/escenas_hedy-lamarr-wifi.py` + `sfx_r3.py`; skill `nichos/shorts/skills/animacion-monigotes.md`) o `estilo-monigotes-3d` (2D dentro de sets 3D al modo de @resultaaquee; skill `nichos/shorts/skills/animacion-monigotes-3d.md`, ejemplo `exports/cajeros-loteria/escenas_cajeros-loteria.py` + `sfx_cajeros.py`). Con el 3D, el generador debe terminar sin avisos de `comprobar_bordes` y `comprobar_obstaculos`, y revisa en la hoja que ningún monigote salga recortado o rebanado (error de la prueba de cajeros, 2026-11-11). **Antes de cada `VIDEO LISTO` (cualquier estilo de monigotes), recorre `nichos/shorts/skills/errores-edicion.md` y anota en `render-log.md` «errores-edicion: N/N revisados»** (creador, 2026-11-12: «para q no se repitan nunca más»). Render siempre con `--gl=angle`. Las reglas del creador ganan; si el proyecto no dice qué estilo usa, pregunta.
 
 ## Entradas
+- **Memoria de errores:** lee entero `nichos/shorts/skills/errores-edicion.md` al empezar cada video o ronda (una vez, ~3K tokens); en las paradas por bloque usa solo la lista corta de `revision-por-bloques.md` §3.
 - Voz del creador: `nichos/shorts/assets/audios/<slug>/voz*.mp3` (la versión más alta). Se usa tal cual. Si falta, detente.
 - Plan de escenas aprobado: `nichos/shorts/scripts/<topic>/<slug>.escenas.md`. Concepto: `<slug>.concept.md`.
 
+- **Estilo `estilo-serie-pov`:** lee `nichos/shorts/skills/animacion-serie-pov.md` y recorre `nichos/shorts/skills/errores-serie-pov.md` (en vez de `errores-edicion.md`); anota «errores-serie-pov: N/N revisados». Ninguna regla de monigotes.
 ## Salida (`nichos/shorts/exports/<slug>/`)
 `final.mp4` (antes respalda el anterior como `final_rN.mp4`), `escenas_<slug>.py`, `crudo_rN.mp4`, `qa/rN_frames/hoja_rN.jpg`, sección `## RN` en `render-log.md` y una línea en `project-log.md`. No crees otros .md.
 
@@ -35,6 +37,7 @@ Siguiente paso: shorts-quality-reviewer.
 - **Voz:** compara la transcripción con el guion palabra por palabra; si falta una, se empalma la frase regenerada en `voz-v2.mp3`.
 - **Gastos:** solo audio = render de solo audio con `-c:v copy`. Gasto de ElevenLabs solo con autorización, controlando el saldo después de cada petición y apuntando los créditos.
 - **Reglas del encargo:** si una contradice las referencias o el perfil, dilo antes de aplicarla.
+- **Nunca `rm`** (ni `rm -f` dentro de un comando largo): pide permiso y te deja parado sin avisar (alerta-nuclear, 22-nov: 9 h perdidas por `rm -f` de dos logs del render). Para vaciar un log usa `: > archivo`; para quitar algo, `mv` a `_papelera/`.
 - **Cierre:** termina siempre con tu informe y tu sección en `render-log.md`, aunque el render vaya en segundo plano.
 
 ## Video de prueba de 10 s antes de cada video nuevo (creador, 2026-11-03)
@@ -57,8 +60,21 @@ Medido: la prueba de 10 s del soldado costó 382K porque se construyeron casi to
 - **Revisa cuadros en hojas de contacto** (un solo JPG con muchos cuadros), no cuadro a cuadro. Lee solo lo necesario: el catálogo, el plan y el perfil, no los videos anteriores enteros ni informes largos.
 - **Usa solo comandos permitidos** en `.claude/settings.json`. Para borrar, mueve a `_papelera/` con `mv`. Si un paso necesita un permiso que no tienes, anótalo en tu informe y sigue con lo demás; un aviso de permiso sin responder te deja parado horas.
 
+## Lecciones de pudding-millas (2026-11-13)
+- **Nada de avisos abiertos al entregar:** cada aviso de `comprobar_bordes` se mira al 100 % y va a `REVISADOS` o se arregla (#35). Mirarlos al 33 % le trasladó el trabajo al reviewer.
+- **Todo texto legible en `CARTELES`**, también formularios, tarjetas y etiquetas tumbados en mesas o suelos (#31, el MAJOR de R2).
+- **Figuras junto a vehículos y muebles:** al lado, sin solaparse, o claramente delante; sin postes ni fondo que las crucen (#29). **Marcos con forma** recortan su contenido (#30). Estos dos los vio el creador, no el QA: míralos tú en la hoja antes de entregar.
+- **Subtítulos:** «cada», «se», «lo» y números compuestos no cierran bloque (#34). **Cifras que suman a un contador**, en su `extra` (#32). **Texto sostenido por un personaje**, delante de la mano (#33).
+- **Si te lanzan para «retomar»**, parte de lo que hay en disco (generador, EDL, piezas) y solo renderiza y mezcla: retomar costó 214K frente a ≈ 500K del editor cortado (#36).
+- **Correcciones por tramos:** re-render solo de los cuadros afectados + `empalmar_tramos.py` + diferencia por bloques contra la versión anterior en todo el video. R3 y R4 salieron así a ≈ 200K cada una.
+- **Coste real:** un render completo que construye 8 sets/piezas nuevos cuesta 500–700K. Avisa en el informe si el plan pide más de 5 piezas nuevas.
+
+## Revisión por bloques mientras construyes (creador, 2026-11-13)
+Aplica `nichos/shorts/skills/revision-por-bloques.md`: 3–4 paradas por video, una al terminar cada bloque de escenas y **antes del render final**, con 2 hojas de 24–30 cuadros sacadas con `fotos.ts` y la lista corta de errores visuales. Arregla en el generador antes de seguir con el bloque siguiente y apunta cada parada en `render-log.md`. Nunca la dejes toda para el final.
+
 ## Antes de la señal
-`python3 tools/architect/biblioteca/reutilizables/comprobar_catalogo.py` sale «CATALOGO al día» (todo SFX y pieza nueva catalogada; obligatorio en cada video, creador 2026-11-03) · Prueba de 10 s aprobada por el creador si el video es nuevo · `validar.ts` sin FAIL · ffprobe y ebur128 dentro de spec · hoja revisada con la lista de la skill · primer y último cuadro comparados.
+Sección **«Errores propios»** en `render-log.md`: todo error que encontraste y arreglaste tú (paradas por bloque o al final), cada uno `#N` o `NUEVO`; los nuevos, añadidos a `errores-edicion.md` (creador, 2026-11-13).
+`python3 tools/architect/biblioteca/reutilizables/comprobar_catalogo.py` sale «CATALOGO al día» (todo SFX y pieza nueva catalogada; obligatorio en cada video, creador 2026-11-03) · Prueba de 10 s aprobada por el creador si el video es nuevo · revisión por bloques 4/4 paradas anotada en `render-log.md` · `validar.ts` sin FAIL · ffprobe y ebur128 dentro de spec · hoja revisada con la lista de la skill · primer y último cuadro comparados.
 
 ## Escala si
 Falta voz o plan aprobado · la transcripción no casa con el guion · una herramienta falla dos veces · una escena pide una pieza que no existe (propónla y espera el ok) · hay gasto sin autorización · una fuente de sonido o una key no tiene permiso (no te saltes bloqueos anti-bots ni 403).
