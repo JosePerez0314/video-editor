@@ -30,6 +30,10 @@ tools/
 !/nichos/shorts/ideas-virales/
 /nichos/shorts/ideas-virales/*
 !/nichos/shorts/ideas-virales/ANALISIS.md
+!/nichos/shorts/ideas-virales/ANALISIS-series-es.md
+!/nichos/shorts/herramientas/
+# calibración del consumo: lecturas de la cuenta de cada persona
+/nichos/shorts/herramientas/consumo_calibracion.json
 #   Excluidos así: scripts/ (guiones), exports/ (renders y logs),
 #   assets/ (voces), references/ (reels de terceros),
 #   publicacion/ (calendario, marca, datos de cuentas),
